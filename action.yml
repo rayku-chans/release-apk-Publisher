@@ -1,16 +1,45 @@
-name: "Release APK Publisher"
-branding:
-  icon: "package"
-  color: "red"
-description: "Build & Publish Release APK on Github"
-author: "ShaunLWM"
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: 'GH Release'
+description: 'Github Action for creating Github Releases'
+author: 'softprops'
 inputs:
-  GITHUB_TOKEN:
-    required: true
-    description: "Github secret token to allow automated publishing of APK to release."
-  REPO_BRANCH:
+  body:
+    description: 'Note-worthy description of changes in release'
     required: false
-    description: "Github repository branch name."
+  body_path:
+    description: 'Path to load note-worthy description of changes in release from'
+    required: false
+  name:
+    description: 'Gives the release a custom name. Defaults to tag name'
+    required: false
+  tag_name:
+    description: 'Gives a tag name. Defaults to github.GITHUB_REF'
+    required: false
+  draft:
+    description: 'Creates a draft release. Defaults to false'
+    required: false
+  prerelease:
+    description: 'Identify the release as a prerelease. Defaults to false'
+    required: false
+  files:
+    description: 'Newline-delimited list of path globs for asset files to upload'
+    required: false
+  fail_on_unmatched_files:
+    description: 'Fails if any of the `files` globs match nothing. Defaults to false'
+    required: false
+  repository:
+    description: 'Repository to make releases against, in <owner>/<repo> format'
+    required: false
+env:
+  'GITHUB_TOKEN': 'As provided by Github Actions'
+outputs:
+  url:
+    description: 'URL to the Release HTML Page'
+  upload_url:
+    description: 'URL for uploading assets to the release'
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: 'node12'
+  main: 'index.js'
+branding:
+  color: 'green'
+  icon: 'package'
