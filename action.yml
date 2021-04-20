@@ -1,8 +1,8 @@
-name: "Debug APK Publisher"
+name: "Release APK Publisher"
 branding:
   icon: "package"
   color: "red"
-description: "Build & Publish Debug APK on Github"
+description: "Build & Publish Release APK on Github"
 author: "ShaunLWM"
 inputs:
   GITHUB_TOKEN:
